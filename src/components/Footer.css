@@ -1,0 +1,22 @@
+.footer {
+    text-align: center;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    text-align: center;
+    color: var(--text-color);
+    position: fixed;
+    bottom: -20px;
+    left: 0;
+    width: 100%;
+  }
+  
+  .footer p {
+    font-family: "Quicksand", sans-serif;
+    border-top: 2px dashed var(--contrast-2);
+    padding: 1rem 0;
+    margin-top: 1rem;
+  }
+  
