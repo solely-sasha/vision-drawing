@@ -1,11 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import "./LandingPage.css"
+import React from "react";
+import { Link } from "react-router-dom";
+import "../css/LandingPage.css";
 
 export default function LandingPage() {
   return (
-    <div className="landing-page" >
-      
+    <div className="landing-page">
       <h1 className="app-title">Vision Drawing</h1>
       <p className="tagline">
         Explore. Create. Share: Prompting Artistic Journeys

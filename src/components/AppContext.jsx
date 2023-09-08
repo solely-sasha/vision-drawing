@@ -1,24 +1,31 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
-const AppContext = createContext();
-
-export const useAppContext = () => {
-  return useContext(AppContext);
-};
+export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [word, setWord] = useState("");
   const [image, setImage] = useState("");
+
   const [savedPrompts, setSavedPrompts] = useState(
     JSON.parse(localStorage.getItem("prompts")) || []
   );
+  const [uploadedImages, setUploadedImages] = useState([]);
+
+  const saveUploadedImage = (imageData) => {
+    setUploadedImages((prevImages) => [...prevImages, imageData]);
+  };
+
   const apiKey = "29aa4173c9msh4db9c7d12898c1dp1f3c3fjsnfcc884049fa8";
   const wordApiUrl = "https://random-word-api.p.rapidapi.com/get_word";
   const imageApiUrl =
     "https://api.unsplash.com/photos/random?client_id=NP9biOBTHQhNUQckckVZ3ire4OAsUcaisPMxIq1EDQg";
 
-  // Fetch random word
+  useEffect(() => {
+    fetchRandomWord();
+    fetchRandomImage();
+  }, []);
+
   const fetchRandomWord = async () => {
     try {
       const response = await axios.get(wordApiUrl, {
@@ -27,7 +34,7 @@ export const AppProvider = ({ children }) => {
           "X-RapidAPI-Host": "random-word-api.p.rapidapi.com",
         },
       });
-
+      console.log(response);
       const randomWord = response.data.word;
       setWord(randomWord);
     } catch (error) {
@@ -53,21 +60,12 @@ export const AppProvider = ({ children }) => {
         return;
       }
       const randomImage = imageResponse.data.urls.regular;
+      console.log(imageResponse.data);
       setImage(randomImage);
     } catch (error) {
       console.error("Error fetching random image:", error);
     }
   };
-
-  useEffect(() => {
-    fetchRandomWord();
-  }, []);
-
-  useEffect(() => {
-    if (word) {
-      fetchRandomImage();
-    }
-  }, [word]);
 
   const onSavePrompt = (prompt) => {
     try {
@@ -104,6 +102,9 @@ export const AppProvider = ({ children }) => {
     savedPrompts,
     onDeletePrompt,
     setSavedPrompts,
+    uploadedImages,
+    setUploadedImages,
+    saveUploadedImage,
   };
 
   return (

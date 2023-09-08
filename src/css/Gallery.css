@@ -6,13 +6,13 @@
  
   }
   
-  .prompts-section {
+  .prompts-section{
     margin-bottom: 2rem;
     width: 100%;
   
   }
   
-  .prompts-section h2 {
+  .gallery h2 {
     font-size: 2.4rem;
     color: #333333;
     margin-bottom: 1rem;
@@ -117,4 +117,6 @@
   font-size: 28px;
   line-height: 1;
 }
+
+
 

@@ -1,12 +1,13 @@
-import React from "react";
-import { useAppContext } from "../AppContext";
+import React, { useContext } from "react";
+import { AppContext } from "./AppContext";
 
 export default function DrawingPrompt() {
-  const { word, image, fetchRandomWord, fetchRandomImage, onSavePrompt } = useAppContext();
+  const { word, image, fetchRandomWord, fetchRandomImage, onSavePrompt } =
+    useContext(AppContext);
 
   const handleGeneratePrompt = () => {
-    fetchRandomWord(); 
-    fetchRandomImage(); 
+    fetchRandomWord();
+    fetchRandomImage();
   };
 
   const handleSavePrompt = () => {
@@ -25,11 +26,15 @@ export default function DrawingPrompt() {
       </div>
       <div className="image-display">
         <h2>Random Image:</h2>
-        {image && <img src={image} alt="Drawing Prompt" />||  <h2 className="image-message">Sorry, no image found. Try again </h2> }
-     
-      </div> 
+        {(image && <img src={image} alt="Drawing Prompt" />) || (
+          <h2 className="image-message">Sorry, no image found. Try again </h2>
+        )}
+      </div>
       <div className="button-group">
-        <button className="generate-prompt button" onClick={handleGeneratePrompt}>
+        <button
+          className="generate-prompt button"
+          onClick={handleGeneratePrompt}
+        >
           Generate New Prompt
         </button>
         <button className="save-prompt button" onClick={handleSavePrompt}>
